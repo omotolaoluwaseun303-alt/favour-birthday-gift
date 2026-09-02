@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#09090c">
+<title>For Favour 🖤🌸</title>
+<style>
+:root{--bg:#08080b;--card:#111116;--pink:#ff9fc7;--rose:#e86f91;--lav:#bda7e8;--white:#fff8fc;--muted:#c9bfc6}
+*{box-sizing:border-box}html,body{margin:0;min-height:100%;font-family:Georgia,"Times New Roman",serif;background:radial-gradient(circle at 20% 10%,#251521 0,transparent 32%),radial-gradient(circle at 85% 90%,#19152a 0,transparent 30%),var(--bg);color:var(--white);overflow-x:hidden}
+body{min-height:100vh}.app{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:24px 16px;position:relative;isolation:isolate}
+.screen{width:min(680px,100%);text-align:center;animation:in .7s ease both;position:relative;z-index:2}.hidden{display:none!important}
+h1{font-size:clamp(2.25rem,9vw,4.4rem);line-height:1.05;margin:0 0 14px;color:#fff;text-shadow:0 0 30px #ff9fc755}
+h2{font-size:clamp(1.8rem,7vw,3rem);margin:0 0 22px}p{font-family:system-ui,-apple-system,sans-serif;line-height:1.75;color:#eee5eb}
+.lead{font-size:1.1rem}.tiny{font-size:.85rem;color:#bfb2bb;margin:12px 0 22px}
+button{font:600 1rem system-ui,-apple-system,sans-serif;border:0;border-radius:999px;padding:14px 22px;cursor:pointer;transition:.25s ease;touch-action:manipulation}
+.primary{background:linear-gradient(135deg,var(--pink),#f7c1da);color:#24141c;box-shadow:0 10px 35px #ff8fbd30}.primary:active{transform:scale(.96)}
+.choice-row{display:flex;justify-content:center;gap:14px;min-height:62px;position:relative}.choice{min-width:120px}.yes{background:#ff9fc7;color:#21131a}.no{background:#27242a;color:#fff;border:1px solid #514852;position:relative}
+.card{background:linear-gradient(145deg,#15151b,#0e0e12);border:1px solid #ffffff14;border-radius:28px;padding:28px 22px;box-shadow:0 25px 80px #0008,0 0 40px #ff8fb915;backdrop-filter:blur(8px);text-align:left}
+.letter{text-align:left}.letter p{font-family:Georgia,"Times New Roman",serif;font-size:1.04rem;color:#f1e9ee;margin:0 0 17px}
+.letter .salute{text-align:center;font-size:1.45rem;color:var(--pink);margin-bottom:25px}.sign{text-align:right;color:var(--pink)!important;font-style:italic}
+.progress{font:700 .8rem system-ui,sans-serif;color:#cdbec8;letter-spacing:.08em;margin-bottom:20px}.question{font-size:clamp(1.5rem,6vw,2.2rem);line-height:1.25;margin:0 auto 26px;max-width:560px}
+.msg{height:30px;color:#ffabc9;font:600 .9rem system-ui,sans-serif;margin-top:10px}
+.floating{position:fixed;inset:0;pointer-events:none;z-index:1;overflow:hidden}.particle{position:absolute;bottom:-50px;opacity:0;animation:float linear forwards;filter:drop-shadow(0 0 7px #ff9fc744)}
+.burst{position:fixed;left:50%;top:50%;pointer-events:none;z-index:20}.burst i{position:absolute;font-style:normal;animation:pop 900ms ease-out forwards}
+.confetti i{position:fixed;top:-20px;font-style:normal;z-index:30;animation:fall 2.7s cubic-bezier(.2,.7,.3,1) forwards}
+.tap{font-family:system-ui,sans-serif;font-size:.8rem;color:#a99ba5;margin-top:18px}
+@keyframes in{from{opacity:0;transform:translateY(18px) scale(.98)}to{opacity:1;transform:none}}
+@keyframes float{0%{transform:translateY(0) rotate(0);opacity:0}12%{opacity:.7}100%{transform:translateY(-115vh) rotate(30deg);opacity:0}}
+@keyframes pop{0%{transform:translate(0,0) scale(.3);opacity:1}100%{transform:translate(var(--x),var(--y)) scale(1.2);opacity:0}}
+@keyframes fall{to{transform:translate(var(--x),110vh) rotate(720deg);opacity:0}}
+@media(max-width:430px){.app{padding:18px 13px}.card{padding:24px 18px;border-radius:24px}.choice-row{gap:9px}.choice{min-width:110px;padding:13px 15px}}
+</style>
+</head>
+<body>
+<div class="floating" id="floating"></div>
+<main class="app">
+<section class="screen" id="opening">
+  <h1>Hey, Big Baby… 🖤</h1>
+  <p class="lead">I made a tiny little something just for you. 🥹🌸</p>
+  <p class="tiny">And yes… you actually have to tap the buttons yourself 😂</p>
+  <button class="primary" id="openBtn">Open my surprise 💌</button>
+</section>
+
+<section class="screen hidden" id="questions">
+  <div class="progress" id="progress">A TINY BIRTHDAY SURPRISE • 1/5</div>
+  <div class="card" style="text-align:center">
+    <div class="question" id="question"></div>
+    <div class="choice-row" id="choices">
+      <button class="choice yes" id="yesBtn">YES ❤️</button>
+      <button class="choice no" id="noBtn">NO 🙄</button>
+    </div>
+    <div class="msg" id="msg"></div>
+  </div>
+  <div class="tap">One little answer at a time, Mi Love. 🌸</div>
+</section>
+
+<section class="screen hidden" id="letterScreen">
+  <div class="card letter">
+    <h2 style="text-align:center;color:#ff9fc7">Happy Birthday, Mi Love ❤️</h2>
+    <p class="salute">For my beautiful Big Baby… 🥹🖤</p>
+    <div id="letter"></div>
+  </div>
+</section>
+
+<section class="screen hidden" id="final">
+  <h2>One last question, Big Baby… 👀</h2>
+  <p style="font-size:1.25rem">Will you let me celebrate you again next year? 🥹❤️</p>
+  <button class="primary" id="finalYes">YES, OF COURSE 💕</button>
+</section>
+
+<section class="screen hidden" id="done">
+  <h1>Happy Birthday, Big Baby! 🌸🖤</h1>
+  <p class="lead">I knew you'd say yes. 🥹❤️</p>
+  <p style="font-size:1.1rem">Happy Birthday, Favour.<br>May this year be beautiful to you. 🖤🌸</p>
+</section>
+</main>
+<script>
+const qs=[
+"Is today the birthday of the cutest Big Baby ever? 👀",
+"Do you know how loved and special you are? 🥹",
+"Do you deserve the most beautiful birthday? 🌸",
+"Are you ready to receive some birthday love? ❤️",
+"Are you ready for your little birthday letter? 💌"
+];
+const noMsgs=["Hmm… wrong answer 😭","Big Baby, please 😂","You know that's not the answer.","Why are you like this? 😭❤️","The NO button is tired of running 😂","Okay okay, I know you're playing with me 😭","Catch me if you can 😂"];
+let index=0,noCount=0;
+const $=id=>document.getElementById(id);
+function show(id){document.querySelectorAll(".screen").forEach(x=>x.classList.add("hidden"));$(id).classList.remove("hidden");$(id).style.animation="none";void $(id).offsetWidth;$(id).style.animation="in .7s ease both"}
+function particles(n=16,final=false){
+ const b=document.createElement("div");b.className="burst";document.body.appendChild(b);
+ const icons=final?["🖤","🌸","❤️","✨","🌷","💗","🥹"]:["🌸","❤️","✨","💗"];
+ for(let i=0;i<n;i++){let e=document.createElement("i");e.textContent=icons[Math.floor(Math.random()*icons.length)];let a=Math.random()*Math.PI*2,r=70+Math.random()*170;e.style.setProperty("--x",Math.cos(a)*r+"px");e.style.setProperty("--y",Math.sin(a)*r+"px");b.appendChild(e)}
+ setTimeout(()=>b.remove(),1000);
+}
+function confetti(){const c=document.createElement("div");c.className="confetti";for(let i=0;i<60;i++){let e=document.createElement("i");e.textContent=["❤️","🌸","✨","💗","🖤","🌷"][i%6];e.style.left=Math.random()*100+"vw";e.style.setProperty("--x",(Math.random()*240-120)+"px");e.style.animationDelay=Math.random()*700+"ms";c.appendChild(e)}document.body.appendChild(c);setTimeout(()=>c.remove(),4000)}
+function loadQ(){ $("progress").textContent=`A TINY BIRTHDAY SURPRISE • ${index+1}/5`; $("question").textContent=qs[index];$("msg").textContent=""; $("noBtn").style.transform="";noCount=0}
+$("openBtn").onclick=()=>{particles(28);setTimeout(()=>{show("questions");loadQ()},450)};
+$("yesBtn").onclick=()=>{particles(18);setTimeout(()=>{if(index<qs.length-1){index++;loadQ()}else{show("letterScreen");typeLetter()}},400)};
+$("noBtn").onclick=()=>{
+ noCount++;$("msg").textContent=noMsgs[Math.min(noCount-1,noMsgs.length-1)];
+ const x=(Math.random()*2-1)*Math.min(105,35+noCount*13), y=(Math.random()*2-1)*Math.min(55,18+noCount*7);
+ $("noBtn").style.transform=`translate(${x}px,${y}px) rotate(${(Math.random()*8-4)}deg)`;
+ if(noCount>=4)$("msg").textContent="Okay, okay 😂 YES is still right there ❤️";
+};
+const letterText=[
+"Happy birthday to my beautiful Big Baby. 🥹🖤",
+"Today is all about you, and I hope you know just how special you are. You deserve to be celebrated, appreciated, loved and reminded of how wonderfully unique you are.",
+"I pray that this new chapter brings you genuine happiness, peace, growth and beautiful memories. May God continue to guide you, protect you, bless you and make a way for you wherever you go.",
+"May the things you quietly hope and pray for find their way to you. May you have more reasons to smile, more moments that make your heart full, and more days where you look around and realise how blessed you are.",
+"I hope you never forget that you deserve good things. You deserve kindness, success, peace, laughter and all the beautiful things life has to offer.",
+"Thank you for being you, Big Baby. For your heart, your personality, your little ways, your laughter, and all those things that make you exactly who you are. 🥹❤️",
+"I hope this year is gentle with you. I hope it surprises you in the sweetest ways and gives you memories you'll keep close to your heart.",
+"Happy birthday, my love. ❤️",
+"I love you, Big Baby. 🖤🌸",
+"— From someone who is very, very happy that you exist. 🥹"
+];
+function typeLetter(){const box=$("letter");box.innerHTML="";let i=0;function next(){if(i>=letterText.length){setTimeout(()=>show("final"),1300);return}let p=document.createElement("p");p.textContent=letterText[i++];box.appendChild(p);p.style.opacity=0;p.animate([{opacity:0,transform:"translateY(8px)"},{opacity:1,transform:"none"}],{duration:700,fill:"forwards"});setTimeout(next,750)}next()}
+$("finalYes").onclick=()=>{particles(55,true);confetti();show("done");particles(25,true)};
+const fl=$("floating");const floatIcons=["♡","✦","🌸","✨","🖤","🌷","·"];function ambient(){let e=document.createElement("span");e.className="particle";e.textContent=floatIcons[Math.floor(Math.random()*floatIcons.length)];e.style.left=Math.random()*100+"%";e.style.fontSize=(12+Math.random()*22)+"px";e.style.animationDuration=(7+Math.random()*8)+"s";fl.appendChild(e);setTimeout(()=>e.remove(),16000)}setInterval(ambient,650);for(let i=0;i<12;i++)setTimeout(ambient,i*300);
+</script>
+</body>
+</html>
